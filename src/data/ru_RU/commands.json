@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Подсказка. Используйте при вводе команды <tab>, чтобы автоматически завершить написание ее или ее аргументов.",
+  "commands.testforblock.failed.tile": "Блок в точке %1$d,%2$d,%3$d — %4$s (ожидалось: %5$s).",
+  "commands.blockstate.stateError": "Состояние блока: '%1$s' недействительно на блоке '%2$s'.",
+  "commands.blockstate.invalidState": "«%1$s» не является допустимым состоянием блока.",
+  "commands.testforblock.failed.data": "Состояние блока в %1$d,%2$d,%3$d отличается от ожидаемого.",
+  "commands.testforblock.success": "Блок успешно найден в точке %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "Используется тактовых областей: %1$d/%2$d.",
+  "commands.tickingarea.noneExist.currentDimension": "В этом измерении нет тактовых областей.",
+  "commands.tickingarea-list.success.currentDimension": "Список тактовых областей в этом измерении",
+  "commands.tickingarea-list.to": "до",
+  "commands.tickingarea-list.preload": "Предварительная загрузка",
+  "commands.tickingarea-add.failure": "Достигнуто максимальное число тактовых областей (%1$d). Невозможно добавить больше тактовых областей.",
+  "commands.tickingarea-add-bounds.success": "Добавлена тактовая область от %1$d до %2$d."
+}

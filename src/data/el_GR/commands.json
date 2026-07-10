@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Συμβουλή: Χρησιμοποίησε το πλήκτρο <tab> κατά την πληκτρολόγηση μιας εντολής για να γίνεται αυτόματη συμπλήρωση της εντολής ή των ορισμάτων της",
+  "commands.testforblock.failed.tile": "Ο κύβος στη θέση %1$d,%2$d,%3$d είναι %4$s (αναμενόμενο: %5$s).",
+  "commands.blockstate.stateError": "Κατάσταση κύβου: Το '%1$s' δεν είναι έγκυρο στον κύβο: '%2$s'.",
+  "commands.blockstate.invalidState": "Το '%1$s' δεν είναι έγκυρη κατάσταση κύβου.",
+  "commands.testforblock.failed.data": "Ο κύβος στο %1$d,%2$d,%3$d δεν αντιστοιχούσε με την αναμενόμενη κατάσταση κύβου.",
+  "commands.testforblock.success": "Βρέθηκε με επιτυχία ο κύβος στη θέση %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d περιοχές αυτόματης ενημέρωσης σε χρήση.",
+  "commands.tickingarea.noneExist.currentDimension": "Δεν υπάρχουν περιοχές αυτόματης ενημέρωσης στην τρέχουσα διάσταση.",
+  "commands.tickingarea-list.success.currentDimension": "Λίστα όλων των περιοχών αυτόματης ενημέρωσης στην τρέχουσα διάσταση",
+  "commands.tickingarea-list.to": "σε",
+  "commands.tickingarea-list.preload": "Προφόρτωση",
+  "commands.tickingarea-add.failure": "Έχεις ήδη συμπληρώσει τον μέγιστο αριθμό περιοχών αυτόματης ενημέρωσης (%1$d). Δεν μπορείς να προσθέσεις περισσότερες περιοχές αυτόματης ενημέρωσης.",
+  "commands.tickingarea-add-bounds.success": "Προστέθηκε περιοχή αυτόματης ενημέρωσης από %1$d έως %2$d."
+}

@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Consejo: utiliza la tecla <tab> al escribir un comando para autocompletar el comando o sus argumentos",
+  "commands.testforblock.failed.tile": "El bloque en %1$d, %2$d, %3$d es %4$s (se esperaba: %5$s).",
+  "commands.blockstate.stateError": "El estado de bloque '%1$s' no es válido en el bloque '%2$s'.",
+  "commands.blockstate.invalidState": "'%1$s' no es un estado de bloque válido.",
+  "commands.testforblock.failed.data": "El bloque de %1$d,%2$d,%3$d no concuerda con el estado de bloque esperado.",
+  "commands.testforblock.success": "Se encontró el bloque correctamente en %1$d, %2$d, %3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d areas de marca en uso.",
+  "commands.tickingarea.noneExist.currentDimension": "No existe ninguna área de marca en la dimensión actual.",
+  "commands.tickingarea-list.success.currentDimension": "Lista de todas las áreas de marca de la dimensión actual",
+  "commands.tickingarea-list.to": "hasta",
+  "commands.tickingarea-list.preload": "Precargar",
+  "commands.tickingarea-add.failure": "Ya se ha alcanzado el número máximo de áreas de marca (%1$d). No se pueden añadir más.",
+  "commands.tickingarea-add-bounds.success": "Se ha añadido el área de marca de %1$d a %2$d."
+}

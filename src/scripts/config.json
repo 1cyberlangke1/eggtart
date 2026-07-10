@@ -1,0 +1,26 @@
+{
+  "commands": [
+    "commands.help.footer",
+    "commands.testforblock.failed.tile",
+    "commands.blockstate.stateError",
+    "commands.blockstate.invalidState",
+    "commands.testforblock.failed.data",
+    "commands.testforblock.success",
+    "commands.tickingarea.inuse",
+    "commands.tickingarea.noneExist.currentDimension",
+    "commands.tickingarea-list.success.currentDimension",
+    "commands.tickingarea-list.to",
+    "commands.tickingarea-list.preload",
+    "commands.tickingarea-add.failure",
+    "commands.tickingarea-add-bounds.success"
+  ],
+  "stateBlacklist": [
+    "wall_connection_type_east",
+    "wall_connection_type_west",
+    "wall_connection_type_north",
+    "wall_connection_type_south",
+    "wall_post_bit",
+    "wall_height"
+  ],
+  "wikiUrl": "https://minecraft.wiki/w/Bedrock_Edition_data_values"
+}

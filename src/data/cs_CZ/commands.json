@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tip: Používejte během psaní příkazů klávesu <tab> pro automatické dokončování příkazů a jejich argumentů",
+  "commands.testforblock.failed.tile": "Blok na pozici %1$d,%2$d,%3$d je %4$s (očekáváno: %5$s).",
+  "commands.blockstate.stateError": "Stav bloku: „%1$s“ je neplatný v bloku: „%2$s“.",
+  "commands.blockstate.invalidState": "„%1$s“ není platný stav bloku.",
+  "commands.testforblock.failed.data": "Blok na pozici %1$d,%2$d,%3$d se neshodoval s očekávaným stavem bloku.",
+  "commands.testforblock.success": "Na pozici %1$d,%2$d,%3$d byl úspěšně nalezen blok.",
+  "commands.tickingarea.inuse": "Používá se %1$d/%2$d tikajících oblastí.",
+  "commands.tickingarea.noneExist.currentDimension": "V aktuální dimenzi neexistuje žádná tikající oblast.",
+  "commands.tickingarea-list.success.currentDimension": "Seznam všech tikajících oblastí v aktuální dimenzi",
+  "commands.tickingarea-list.to": "na",
+  "commands.tickingarea-list.preload": "Předběžné načíst",
+  "commands.tickingarea-add.failure": "Již jste dosáhli maximálního počtu tikajících oblastí (%1$d). Další tikající oblasti nelze přidat.",
+  "commands.tickingarea-add-bounds.success": "Přidána tikající oblast z %1$d do %2$d."
+}

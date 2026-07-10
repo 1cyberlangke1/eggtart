@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tips: Använd <tab> när du skriver kommandon för att komplettera kommandot eller dess argument automatiskt",
+  "commands.testforblock.failed.tile": "Blocket på %1$d,%2$d,%3$d är %4$s (förväntat: %5$s).",
+  "commands.blockstate.stateError": "Blockstatus: ''%1$s'' är ogiltigt på block: ''%2$s''.",
+  "commands.blockstate.invalidState": "''%1$s'' är ingen giltig blockstatus.",
+  "commands.testforblock.failed.data": "Blocket på %1$d,%2$d,%3$d matchade inte det förväntade blocktillståndet.",
+  "commands.testforblock.success": "Blocket hittades på %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d tickområden används.",
+  "commands.tickingarea.noneExist.currentDimension": "Den aktuella dimensionen har inga tickområden.",
+  "commands.tickingarea-list.success.currentDimension": "Lista med alla tickområden i den aktuella dimensionen",
+  "commands.tickingarea-list.to": "till",
+  "commands.tickingarea-list.preload": "Förinläsning",
+  "commands.tickingarea-add.failure": "Det maximala antalet tickområden (%1$d) har redan uppnåtts. Kan inte lägga till fler tickområden.",
+  "commands.tickingarea-add-bounds.success": "Lade till tickområde från %1$d till %2$d"
+}

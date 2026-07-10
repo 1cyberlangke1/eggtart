@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Dica: Usa a tecla <tab> ao escrever um comando para o auto-completar ou os seus argumentos",
+  "commands.testforblock.failed.tile": "O bloco em %1$d,%2$d,%3$d é %4$s (previsto: %5$s).",
+  "commands.blockstate.stateError": "O Estado de Bloco: “%1$s” é inválido no Bloco: “%2$s”.",
+  "commands.blockstate.invalidState": "“%1$s” não é um Estado de Bloco válido",
+  "commands.testforblock.failed.data": "O bloco em %1$d,%2$d,%3$d não corresponde ao estado de bloco esperado.",
+  "commands.testforblock.success": "Bloco encontrado com êxito em %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d áreas de seleção em utilização.",
+  "commands.tickingarea.noneExist.currentDimension": "Não existem áreas de seleção na dimensão atual.",
+  "commands.tickingarea-list.success.currentDimension": "Lista de todas as áreas de seleção na dimensão atual",
+  "commands.tickingarea-list.to": "para",
+  "commands.tickingarea-list.preload": "Pré-Carregamento",
+  "commands.tickingarea-add.failure": "O número máximo de áreas de seleção (%1$d) já foi atingido. Não é possível adicionar mais áreas de seleção.",
+  "commands.tickingarea-add-bounds.success": "Adicionada área de seleção de %1$d a %2$d."
+}

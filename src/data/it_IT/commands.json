@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Suggerimento: usa il tasto <tab> mentre scrivi un comando per completare automaticamente il comando o i suoi parametri",
+  "commands.testforblock.failed.tile": "Il blocco in %1$d,%2$d,%3$d è %4$s (previsto: %5$s).",
+  "commands.blockstate.stateError": "Stato blocco: '%1$s' non è valido nel blocco: '%2$s'.",
+  "commands.blockstate.invalidState": "“%1$s” non è uno stato blocco valido.",
+  "commands.testforblock.failed.data": "Il blocco in %1$d,%2$d,%3$d non aveva lo stato blocco previsto.",
+  "commands.testforblock.success": "Blocco in %1$d,%2$d,%3$d trovato.",
+  "commands.tickingarea.inuse": "%1$d aree spuntabili su %2$d in uso.",
+  "commands.tickingarea.noneExist.currentDimension": "Non esistono aree spuntabili nella dimensione attuale.",
+  "commands.tickingarea-list.success.currentDimension": "Lista di tutte le aree spuntabili nella dimensione attuale",
+  "commands.tickingarea-list.to": "a",
+  "commands.tickingarea-list.preload": "Precarica",
+  "commands.tickingarea-add.failure": "È stato già raggiunto il numero massimo di aree spuntabili (%1$d). Non è possibile aggiungerne altre.",
+  "commands.tickingarea-add-bounds.success": "Aggiunta area spuntabile da %1$d a %2$d."
+}

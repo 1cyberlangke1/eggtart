@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "小提示： 在输入命令时可以使用  <tab>  键来自动补全命令或参数",
+  "commands.testforblock.failed.tile": "位于 %1$d,%2$d,%3$d 的方块为 %4$s ( 预定：%5$s)",
+  "commands.blockstate.stateError": "方块状态：“%1$s”在此方块上无效：“%2$s”。",
+  "commands.blockstate.invalidState": "“%1$s”为无效方块状态。",
+  "commands.testforblock.failed.data": "位于 %1$d,%2$d,%3$d 的方块与预期的方块状态不匹配。",
+  "commands.testforblock.success": "成功找到了位于 %1$d,%2$d,%3$d 的方块。",
+  "commands.tickingarea.inuse": "%1$d/%2$d 常加载区域正在使用。",
+  "commands.tickingarea.noneExist.currentDimension": "当前维度中不存在任何常加载区域。",
+  "commands.tickingarea-list.success.currentDimension": "当前维度中的所有常加载区域的列表",
+  "commands.tickingarea-list.to": "到",
+  "commands.tickingarea-list.preload": "预先下载",
+  "commands.tickingarea-add.failure": "已达到常加载区域的最大数量 (%1$d)。无法再添加更多常加载区域。",
+  "commands.tickingarea-add-bounds.success": "已将常加载区域从 %1$d 添加到 %2$d。"
+}

@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tipp: Benutze beim Tippen die Taste <tab> zur automatischen Vervollständigung von Befehlen oder ihrer Argumente",
+  "commands.testforblock.failed.tile": "Der Block bei %1$d, %2$d, %3$d ist %4$s (erwartet: %5$s).",
+  "commands.blockstate.stateError": "Blockstatus: '%1$s' ist nicht gültig für Block: '%2$s'.",
+  "commands.blockstate.invalidState": "%1$s ist kein gültiger Blockstatus.",
+  "commands.testforblock.failed.data": "Der Block bei %1$d, %2$d, %3$d entspricht nicht dem erwarteten Blockstatus.",
+  "commands.testforblock.success": "Block bei %1$d, %2$d, %3$d gefunden.",
+  "commands.tickingarea.inuse": "%1$d/%2$d Ticking-Bereiche in Verwendung.",
+  "commands.tickingarea.noneExist.currentDimension": "In der aktuellen Dimension sind keine Ticking-Bereiche vorhanden.",
+  "commands.tickingarea-list.success.currentDimension": "Liste aller Ticking-Bereiche in der aktuellen Dimension",
+  "commands.tickingarea-list.to": "bis",
+  "commands.tickingarea-list.preload": "Vorladen",
+  "commands.tickingarea-add.failure": "Die maximale Anzahl an Ticking-Bereichen (%1$d) wurde erreicht. Es können keine weiteren Ticking-Bereiche erstellt werden.",
+  "commands.tickingarea-add-bounds.success": "Ticking-Bereich von %1$d bis %2$d hinzugefügt."
+}

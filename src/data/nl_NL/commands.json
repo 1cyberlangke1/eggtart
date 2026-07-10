@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tip: gebruik de <tab>-toets bij het typen van een commando om het commando of de argumenten automatisch aan te vullen",
+  "commands.testforblock.failed.tile": "Het blok op %1$d,%2$d,%3$d is %4$s (verwacht: %5$s).",
+  "commands.blockstate.stateError": "Blokstatus: %1$s is ongeldig voor blok: %2$s.",
+  "commands.blockstate.invalidState": "%1$s is geen geldige blokstatus.",
+  "commands.testforblock.failed.data": "Het blok op %1$d,%2$d,%3$d komt niet overeen met de verwachte blokstatus.",
+  "commands.testforblock.success": "Blok is gevonden op %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d tikgebieden in gebruik.",
+  "commands.tickingarea.noneExist.currentDimension": "Er bestaan geen tikgebieden in de huidige dimensie.",
+  "commands.tickingarea-list.success.currentDimension": "Lijst van alle tikgebieden in de huidige dimensie",
+  "commands.tickingarea-list.to": "naar",
+  "commands.tickingarea-list.preload": "Vooraf laden",
+  "commands.tickingarea-add.failure": "Maximumaantal tikgebieden (%1$d) is al bereikt. Kan geen tikgebieden meer toevoegen.",
+  "commands.tickingarea-add-bounds.success": "Tikgebied toegevoegd van %1$d naar %2$d."
+}

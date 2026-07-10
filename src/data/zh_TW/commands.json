@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "提示：輸入指令時請使用 <tab> 鍵來自動完成指令或參數",
+  "commands.testforblock.failed.tile": "在 %1$d,%2$d,%3$d 的方塊是 %4$s (預期：%5$s)。",
+  "commands.blockstate.stateError": "方塊狀態 '%1$s' 在方塊 '%2$s' 上無效。",
+  "commands.blockstate.invalidState": "%1$s' 不是有效的方塊狀態。",
+  "commands.testforblock.failed.data": "%1$d、%2$d、%3$d 的方塊與預期的方塊狀態不相符。",
+  "commands.testforblock.success": "在 %1$d,%2$d,%3$d 成功找到該方塊。",
+  "commands.tickingarea.inuse": "%1$d 個自動刷新區域正在使用中 (共 %2$d 個)。",
+  "commands.tickingarea.noneExist.currentDimension": "目前的向度中沒有任何自動刷新區域。",
+  "commands.tickingarea-list.success.currentDimension": "列出目前向度中的所有自動刷新區域",
+  "commands.tickingarea-list.to": "至",
+  "commands.tickingarea-list.preload": "預先載入",
+  "commands.tickingarea-add.failure": "自動刷新區域的數量已達上限 (%1$d 個)。您無法新增更多的自動刷新區域。",
+  "commands.tickingarea-add-bounds.success": "已從 %1$d 將自動刷新區域新增至 %2$d。"
+}

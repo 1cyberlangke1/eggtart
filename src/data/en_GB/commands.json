@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tip: Use the <tab> key while typing a command to auto-complete the command or its arguments",
+  "commands.testforblock.failed.tile": "The block at %1$d,%2$d,%3$d is %4$s (expected: %5$s).",
+  "commands.blockstate.stateError": "Block State: '%1$s' is invalid on Block: '%2$s'.",
+  "commands.blockstate.invalidState": "'%1$s' is not a valid Block State.",
+  "commands.testforblock.failed.data": "The block at %1$d,%2$d,%3$d did not match the expected block state.",
+  "commands.testforblock.success": "Successfully found the block at %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d ticking areas in use.",
+  "commands.tickingarea.noneExist.currentDimension": "No ticking areas exist in the current dimension.",
+  "commands.tickingarea-list.success.currentDimension": "List of all ticking areas in current dimension",
+  "commands.tickingarea-list.to": "to",
+  "commands.tickingarea-list.preload": "Preload",
+  "commands.tickingarea-add.failure": "Max number of ticking areas (%1$d) has already been reached. Cannot add more ticking areas.",
+  "commands.tickingarea-add-bounds.success": "Added ticking area from %1$d to %2$d."
+}

@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tips: Bruk <tab> til automatisk å fullføre kommandoen eller kommandoens argumenter når du skriver en kommando",
+  "commands.testforblock.failed.tile": "Blokken på %1$d,%2$d,%3$d er %4$s (forventet %5$s).",
+  "commands.blockstate.stateError": "Blokktilstand: %1$s er ugyldig på blokk: %2$s.",
+  "commands.blockstate.invalidState": "%1$s er ikke en gyldig blokktilstand.",
+  "commands.testforblock.failed.data": "Blokken på %1$d,%2$d,%3$d samsvarte ikke med forventet blokktilstand.",
+  "commands.testforblock.success": "Fant blokken på %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d selvoppdaterende områder er i bruk.",
+  "commands.tickingarea.noneExist.currentDimension": "Det finnes ingen selvoppdaterende områder i den nåværende dimensjonen.",
+  "commands.tickingarea-list.success.currentDimension": "Liste over alle selvoppdaterende områder i den nåværende dimensjonen",
+  "commands.tickingarea-list.to": "til",
+  "commands.tickingarea-list.preload": "Forhåndslast",
+  "commands.tickingarea-add.failure": "Maksimalt antall selvoppdaterende områder (%1$d) er allerede nådd. Kan ikke legge til flere selvoppdaterende områder.",
+  "commands.tickingarea-add-bounds.success": "La til selvoppdaterende område fra %1$d i %2$d."
+}

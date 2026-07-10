@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Съвет: Използвайте клавиша <tab>, докато въвеждате команда, за автоматично довършване на командата или аргументите й",
+  "commands.testforblock.failed.tile": "Блокът на %1$d,%2$d,%3$d е %4$s (очакваше се: %5$s).",
+  "commands.blockstate.stateError": "Състояние на блок: „%1$s“ е невалидно в блок: „%2$s“.",
+  "commands.blockstate.invalidState": "„%1$s“ не е валидно състояние на блок.",
+  "commands.testforblock.failed.data": "Блокът на %1$d,%2$d,%3$d не съвпадна с очакваното състояние на блока.",
+  "commands.testforblock.success": "Блокът на %1$d,%2$d,%3$d е открит успешно.",
+  "commands.tickingarea.inuse": "Използват се %1$d/%2$d зони с активни тикове.",
+  "commands.tickingarea.noneExist.currentDimension": "Не съществуват зони с активни тикове в настоящото измерение.",
+  "commands.tickingarea-list.success.currentDimension": "Списък на всички зони с активни тикове в настоящото измерение",
+  "commands.tickingarea-list.to": "към",
+  "commands.tickingarea-list.preload": "Предварително зареждане",
+  "commands.tickingarea-add.failure": "Достигнат е максималният брой зони с активни тикове (%1$d). Не могат да бъдат добавени повече зони с активни тикове.",
+  "commands.tickingarea-add-bounds.success": "Добавена е зона с активни тикове от %1$d до %2$d."
+}

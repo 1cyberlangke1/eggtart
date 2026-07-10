@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Wskazówka: wpisując polecenie, użyj klawisza <tab>, żeby automatycznie uzupełnić polecenie lub jego argumenty",
+  "commands.testforblock.failed.tile": "Blok przy %1$d,%2$d,%3$d to %4$s (oczekiwano: %5$s).",
+  "commands.blockstate.stateError": "Stan bloku: '%1$s' jest nieprawidłowy w bloku: '%2$s'.",
+  "commands.blockstate.invalidState": "'%1$s' jest nieprawidłowym stanem bloku.",
+  "commands.testforblock.failed.data": "Blok na %1$d,%2$d,%3$d nie odpowiada oczekiwanemu stanowi bloku.",
+  "commands.testforblock.success": "Blok znaleziony przy %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "Obszary tickowania w użyciu: %1$d/%2$d.",
+  "commands.tickingarea.noneExist.currentDimension": "W obecnym wymiarze nie ma obszarów tickowania.",
+  "commands.tickingarea-list.success.currentDimension": "Wykaz wszystkich obszarów tickowania w obecnym wymiarze",
+  "commands.tickingarea-list.to": "do",
+  "commands.tickingarea-list.preload": "Pobranie wstępne",
+  "commands.tickingarea-add.failure": "Osiągnięto maksymalną liczbę obszarów tickowania (%1$d). Nie można dodać kolejnych.",
+  "commands.tickingarea-add-bounds.success": "Dodano obszary tickowania od %1$d do %2$d."
+}

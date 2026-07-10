@@ -1,0 +1,8 @@
+{
+  "playerName": "nichengzaxie",
+  "port": "8000",
+  "tickingArea": {
+    "from": [0, -64, 0],
+    "to": [15, 319, 15]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "İpucu: Bir komut girerken komut veya argümanlarının otomatik olarak tamamlanması için <tab> tuşunu kullanın",
+  "commands.testforblock.failed.tile": "%1$d,%2$d,%3$d konumundaki blok %4$s (beklenen: %5$s).",
+  "commands.blockstate.stateError": "Blok Durumu: '%1$s', Blok: '%2$s' üzerinde geçersiz.",
+  "commands.blockstate.invalidState": "'%1$s' geçerli bir Blok Durumu değil.",
+  "commands.testforblock.failed.data": "%1$d,%2$d,%3$d konumundaki blok, beklenen blok durumu ile eşleşmedi.",
+  "commands.testforblock.success": "%1$d,%2$d,%3$d konumundaki blok başarıyla bulundu.",
+  "commands.tickingarea.inuse": "%1$d/%2$d işaretleme alanı kullanılıyor.",
+  "commands.tickingarea.noneExist.currentDimension": "Geçerli boyutta işaretleme alanı yok.",
+  "commands.tickingarea-list.success.currentDimension": "Geçerli boyuttaki tüm işaretleme alanlarının listesi",
+  "commands.tickingarea-list.to": "hedef:",
+  "commands.tickingarea-list.preload": "Önyükleme",
+  "commands.tickingarea-add.failure": "İşaretleme alanı üst sınırına (%1$d) zaten ulaşıldı. Daha fazla işaretleme alanı eklenemez.",
+  "commands.tickingarea-add-bounds.success": "%1$d bölgesinden %2$d bölgesine işaretleme alanı eklendi."
+}

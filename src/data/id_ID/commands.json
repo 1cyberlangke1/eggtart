@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tips: Gunakan tombol <tab> saat mengetik perintah untuk menyelesaikan perintah atau argumen secara otomatis",
+  "commands.testforblock.failed.tile": "Blok di %1$d,%2$d,%3$d adalah %4$s (diharapkan: %5$s).",
+  "commands.blockstate.stateError": "Status Blok: '%1$s' tidak valid di Blok: '%2$s'.",
+  "commands.blockstate.invalidState": "'%1$s' bukan Status Blok yang valid.",
+  "commands.testforblock.failed.data": "Blok di %1$d,%2$d,%3$d tidak sesuai dengan status blok yang diharapkan.",
+  "commands.testforblock.success": "Berhasil menemukan blok di %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d area ticking digunakan.",
+  "commands.tickingarea.noneExist.currentDimension": "Tidak ada area ticking dalam dimension saat ini.",
+  "commands.tickingarea-list.success.currentDimension": "Cantumkan semua area ticking dalam dimensi saat ini",
+  "commands.tickingarea-list.to": "ke",
+  "commands.tickingarea-list.preload": "Pramuat",
+  "commands.tickingarea-add.failure": "Jumlah maks. area ticking (%1$d) telah tercapai. Tidak bisa menambahkan area ticking lagi.",
+  "commands.tickingarea-add-bounds.success": "Telah menambahkan area ticking dari %1$d ke %2$d."
+}

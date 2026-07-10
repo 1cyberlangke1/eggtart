@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Astuce : utilisez la touche <tab> en tapant une commande pour compléter la commande ou ses paramètres automatiquement",
+  "commands.testforblock.failed.tile": "Le bloc aux coordonnées %1$d, %2$d, %3$d est %4$s (attendu : %5$s)",
+  "commands.blockstate.stateError": "État du bloc : « %1$s » n’est pas valide sur le bloc « %2$s ».",
+  "commands.blockstate.invalidState": "« %1$s » n'est pas un état de bloc valide.",
+  "commands.testforblock.failed.data": "Le bloc aux coordonnées %1$d,%2$d,%3$d ne correspondait pas à l'état attendu du bloc.",
+  "commands.testforblock.success": "Le bloc a bien été trouvé aux coordonnées %1$d, %2$d, %3$d",
+  "commands.tickingarea.inuse": "Zones de ticks utilisées : %1$d/%2$d.",
+  "commands.tickingarea.noneExist.currentDimension": "Aucune zone de ticks n'existe dans la dimension actuelle.",
+  "commands.tickingarea-list.success.currentDimension": "Liste de toutes les zones de ticks dans la dimension actuelle",
+  "commands.tickingarea-list.to": "à",
+  "commands.tickingarea-list.preload": "Préchargement",
+  "commands.tickingarea-add.failure": "Le nombre maximal de zones de ticks (%1$d) a déjà été atteint. Impossible d'ajouter plus de zones de ticks.",
+  "commands.tickingarea-add-bounds.success": "Une zone de ticks a été ajoutée de %1$d à %2$d."
+}

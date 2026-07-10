@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+.env
+.env.local
+.sisyphus/
+.claude/
+.playwright-mcp/
+AGENTS.md
+CLAUDE.md
+HANDOFF.md
+struct/

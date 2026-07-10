@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Підказка. Вводячи команду, натисніть клавішу <tab>, щоб команда або її аргументи заповнились автоматично",
+  "commands.testforblock.failed.tile": "Блок за координатами %1$d,%2$d,%3$d є %4$s (очікувалося: %5$s).",
+  "commands.blockstate.stateError": "Стан блоку: «%1$s» є неприпустимим для блоку: «%2$s».",
+  "commands.blockstate.invalidState": "«%1$s» є неприпустимим станом блоку.",
+  "commands.testforblock.failed.data": "Стан блока %1$d,%2$d,%3$d відрізняється від очікуваного.",
+  "commands.testforblock.success": "Знайдено блок за координатами %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "Використовується %1$d/%2$d зациклених областей.",
+  "commands.tickingarea.noneExist.currentDimension": "У поточному вимірі немає зациклених областей.",
+  "commands.tickingarea-list.success.currentDimension": "Список усіх зациклених областей у поточному вимірі",
+  "commands.tickingarea-list.to": "по",
+  "commands.tickingarea-list.preload": "Попереднє завантаження",
+  "commands.tickingarea-add.failure": "Уже досягнуто максимальної кількості зациклених областей (%1$d). Не можна додати інші зациклені області.",
+  "commands.tickingarea-add-bounds.success": "Додано зациклену область із %1$d по %2$d."
+}

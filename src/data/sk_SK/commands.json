@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tip: Pri zadávaní príkazu použite kláves <tab> na automatické dokončenie príkazu alebo argumentov",
+  "commands.testforblock.failed.tile": "Blok na pozícii %1$d, %2$d, %3$d je %4$s (očakával sa: %5$s).",
+  "commands.blockstate.stateError": "Stav bloku: „%1$s“ je neplatný pri bloku: „%2$s“.",
+  "commands.blockstate.invalidState": "„%1$s“ nie je platný Stav bloku.",
+  "commands.testforblock.failed.data": "Blok na pozícii %1$d,%2$d,%3$d nezodpovedal očakávanému stavu bloku.",
+  "commands.testforblock.success": "Blok sa úspešne našiel na pozícii %1$d, %2$d, %3$d.",
+  "commands.tickingarea.inuse": "Používané živé oblasti: %1$d/%2$d.",
+  "commands.tickingarea.noneExist.currentDimension": "V aktuálnej dimenzii neexistujú žiadne živé oblasti.",
+  "commands.tickingarea-list.success.currentDimension": "Zoznam všetkých živých oblastí v aktuálnej dimenzii",
+  "commands.tickingarea-list.to": "do",
+  "commands.tickingarea-list.preload": "Predbežné načítanie",
+  "commands.tickingarea-add.failure": "Už bol dosiahnutý maximálny počet živých oblastí (%1$d). Nemožno pridať viac živých oblastí.",
+  "commands.tickingarea-add-bounds.success": "Pridali sa živé oblasti od %1$d do %2$d."
+}

@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Astuce : utilisez la touche <tab> en tapant une commande pour compléter la commande ou ses paramètres automatiquement",
+  "commands.testforblock.failed.tile": "Le bloc aux coordonnées %1$d, %2$d, %3$d est %4$s (attendu : %5$s)",
+  "commands.blockstate.stateError": "État du bloc : '%1$s' est invalide sur bloc : '%2$s'.",
+  "commands.blockstate.invalidState": "« %1$s » n'est pas un état de bloc valide.",
+  "commands.testforblock.failed.data": "Le bloc aux coordonnées %1$d, %2$d, %3$d ne correspondait pas au statut de bloc attendu.",
+  "commands.testforblock.success": "Le bloc a bien été trouvé aux coordonnées %1$d, %2$d, %3$d",
+  "commands.tickingarea.inuse": "Zones persistantes utilisées : %1$d/%2$d.",
+  "commands.tickingarea.noneExist.currentDimension": "Il n'y a aucune zone persistante dans la dimension actuelle.",
+  "commands.tickingarea-list.success.currentDimension": "Affichage de toutes les zones persistantes de la dimension actuelle",
+  "commands.tickingarea-list.to": "vers",
+  "commands.tickingarea-list.preload": "Préchargement",
+  "commands.tickingarea-add.failure": "Le nombre maximal de zones persistantes (%1$d) a déjà été atteint. Impossible d'ajouter des zones supplémentaires.",
+  "commands.tickingarea-add-bounds.success": "Zone persistante ajoutée de %1$d à %2$d."
+}

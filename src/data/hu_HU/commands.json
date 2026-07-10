@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tipp: Parancsok begépelésekor használd a <tab> billentyűt a parancsok vagy az argumentumok automatikus kiegészítéséhez",
+  "commands.testforblock.failed.tile": "A(z) %1$d,%2$d,%3$d helyen lévő blokk: %4$s (várt: %5$s).",
+  "commands.blockstate.stateError": "A következő blokkállapot „%1$s” érvénytelen a következő blokk esetében: „%2$s”.",
+  "commands.blockstate.invalidState": "A(z) „%1$s” nem érvényes blokkállapot.",
+  "commands.testforblock.failed.data": "A(z) %1$d,%2$d,%3$d helyen lévő blokk nem egyezik a várt blokkállapottal.",
+  "commands.testforblock.success": "Sikeresen megtaláltad a(z) %1$d,%2$d,%3$d helyen lévő blokkot.",
+  "commands.tickingarea.inuse": "%1$d/%2$d ketyegő terület használatban.",
+  "commands.tickingarea.noneExist.currentDimension": "Nincsenek ketyegő területek a jelenlegi dimenzióban.",
+  "commands.tickingarea-list.success.currentDimension": "A jelenlegi dimenzióban található ketyegő területek listája",
+  "commands.tickingarea-list.to": "-",
+  "commands.tickingarea-list.preload": "Előzetes betöltés",
+  "commands.tickingarea-add.failure": "Már elérted a ketyegő területek maximális számát (%1$d). Több ketyegő terület nem adható hozzá.",
+  "commands.tickingarea-add-bounds.success": "Ketyegő terület hozzáadva %1$d és %2$d között."
+}

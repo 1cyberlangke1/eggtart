@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Dica: Use a tecla <tab> enquanto digita um comando para autocompletar o comando ou seus argumentos",
+  "commands.testforblock.failed.tile": "O bloco em %1$d,%2$d,%3$d é %4$s (esperado: %5$s).",
+  "commands.blockstate.stateError": "Estado do bloco: ''%1$s'' inválido no Bloco: ''%2$s''.",
+  "commands.blockstate.invalidState": "''%1$s'' não é um Estado de Bloco válido.",
+  "commands.testforblock.failed.data": "O bloco em %1$d,%2$d,%3$d não correspondeu ao estado esperado do bloco.",
+  "commands.testforblock.success": "Encontrado com êxito o bloco em %1$d,%2$d,%3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d áreas de acionamento em uso.",
+  "commands.tickingarea.noneExist.currentDimension": "Não existem áreas de acionamento nesta dimensão.",
+  "commands.tickingarea-list.success.currentDimension": "Lista de todas as áreas de acionamento na dimensão atual",
+  "commands.tickingarea-list.to": "para",
+  "commands.tickingarea-list.preload": "Download antecipado",
+  "commands.tickingarea-add.failure": "O número máximo de áreas de acionamento (%1$d) já foi atingido. Não é possível adicionar mais áreas de acionamento.",
+  "commands.tickingarea-add-bounds.success": "Área de acionamento adicionada de %1$d até %2$d."
+}

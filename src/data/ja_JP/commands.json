@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "ヒント: コマンド入力中に <tab> キーを押すとコマンドや引数が自動補完されます",
+  "commands.testforblock.failed.tile": "%1$d,%2$d,%3$d にあるブロックは %4$s です (予想では %5$s)。",
+  "commands.blockstate.stateError": "ブロック ステート: '%1$s' はブロック: '%2$s' では無効です。",
+  "commands.blockstate.invalidState": "'%1$s' は無効なブロック ステートです。",
+  "commands.testforblock.failed.data": "%1$d、%2$d、%3$d にあるブロックと予想されるブロックの状態が一致しませんでした。",
+  "commands.testforblock.success": "ブロックは %1$d, %2$d, %3$d で見つかりました。",
+  "commands.tickingarea.inuse": "使用中のティック領域: %1$d/%2$d",
+  "commands.tickingarea.noneExist.currentDimension": "現在のディメンションにはティック領域が存在しません",
+  "commands.tickingarea-list.success.currentDimension": "現在のディメンションに存在するすべてのティック領域のリスト",
+  "commands.tickingarea-list.to": "出力先:",
+  "commands.tickingarea-list.preload": "プリロード",
+  "commands.tickingarea-add.failure": "既にティック領域は最大 (%1$d) に達しているため、ティック領域を追加することはできません",
+  "commands.tickingarea-add-bounds.success": "ティック領域を %1$d から %2$d に追加しました"
+}

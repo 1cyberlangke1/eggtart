@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "팁: 명령어를 입력하는 동안 <tab> 키를 사용하여 명령어 또는 인수를 자동 완성 할 수 있습니다",
+  "commands.testforblock.failed.tile": "좌표 %1$d,%2$d,%3$d의 블록은 %4$s입니다(원래 예상 값: %5$s).",
+  "commands.blockstate.stateError": "블록 상태: '%1$s'(은)는 다음 블록에 유효하지 않습니다. '%2$s'.",
+  "commands.blockstate.invalidState": "'%1$s'은(는) 유효한 블록 상태가 아닙니다.",
+  "commands.testforblock.failed.data": "좌표 %1$d,%2$d,%3$d의 블록이 예상된 블록 상태와 일치하지 않습니다.",
+  "commands.testforblock.success": "좌표 %1$d,%2$d,%3$d의 블록이 검색되었습니다.",
+  "commands.tickingarea.inuse": "%1$d/%2$d 틱 영역이 사용 중입니다.",
+  "commands.tickingarea.noneExist.currentDimension": "이 차원에는 틱 영역이 존재하지 않습니다.",
+  "commands.tickingarea-list.success.currentDimension": "이 차원에 존재하는 모든 틱 영역 목록",
+  "commands.tickingarea-list.to": "(으)로",
+  "commands.tickingarea-list.preload": "사전 불러오기",
+  "commands.tickingarea-add.failure": "허용된 최대 틱 영역 개수(%1$d)가 초과되었습니다. 틱 영역을 더 이상 추가할 수 없습니다.",
+  "commands.tickingarea-add-bounds.success": "%1$d에서 %2$d(으)로 틱 영역을 추가했습니다."
+}

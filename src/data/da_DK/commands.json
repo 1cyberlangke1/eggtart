@@ -1,0 +1,15 @@
+{
+  "commands.help.footer": "Tip: Hvis du trykker på tasten <tab>, når du skriver en kommando, fuldføres kommandoen eller dens argumenter automatisk",
+  "commands.testforblock.failed.tile": "Blokken på %1$d, %2$d, %3$d er %4$s (forventet: %5$s).",
+  "commands.blockstate.stateError": "Bloktilstand: '%1$s' er ugyldig på blok: '%2$s'.",
+  "commands.blockstate.invalidState": "'%1$s' er ikke en gyldig bloktilstand.",
+  "commands.testforblock.failed.data": "Blokken på %1$d, %2$d, %3$d matcher ikke den forventede bloktilstand.",
+  "commands.testforblock.success": "Blokken er fundet på %1$d, %2$d, %3$d.",
+  "commands.tickingarea.inuse": "%1$d/%2$d tickende områder er i brug.",
+  "commands.tickingarea.noneExist.currentDimension": "Den aktuelle dimension indeholder ingen tickende områder.",
+  "commands.tickingarea-list.success.currentDimension": "Liste over alle tickende områder i den aktuelle dimension",
+  "commands.tickingarea-list.to": "til",
+  "commands.tickingarea-list.preload": "Preload",
+  "commands.tickingarea-add.failure": "Det maksimale antal tickende områder (%1$d) er allerede nået. Der kan ikke tilføjes flere.",
+  "commands.tickingarea-add-bounds.success": "Tilføjede et tickende område fra %1$d til %2$d."
+}
