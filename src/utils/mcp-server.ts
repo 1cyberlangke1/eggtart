@@ -8,8 +8,26 @@ import { regionManager } from "./world/region.js"
 import { scanRegion } from "./world/scanner.js"
 import { runScript } from "./world/script-runner.js"
 
+type RegionInfo = { name: string; p1: [number, number, number]; p2: [number, number, number] }
+
 function notConnected(): { content: Array<{ type: "text"; text: string }>; isError: true } {
   return { content: [{ type: "text", text: "游戏未连接" }], isError: true }
+}
+
+function regionSize(r: RegionInfo): string {
+  const [mx, Mx] = r.p1[0] < r.p2[0] ? [r.p1[0], r.p2[0]] : [r.p2[0], r.p1[0]]
+  const [my, My] = r.p1[1] < r.p2[1] ? [r.p1[1], r.p2[1]] : [r.p2[1], r.p1[1]]
+  const [mz, Mz] = r.p1[2] < r.p2[2] ? [r.p1[2], r.p2[2]] : [r.p2[2], r.p1[2]]
+  const w = Mx - mx + 1
+  const h = My - my + 1
+  const d = Mz - mz + 1
+  return `${w}×${h}×${d}, ${w * h * d} blocks`
+}
+
+function dirFromYaw(yRot: number): string {
+  const deg = ((yRot % 360) + 360) % 360
+  const dirs = ["南", "西南", "西", "西北", "北", "东北", "东", "东南"]
+  return dirs[Math.round(deg / 45) % 8] as string
 }
 
 export async function startMcpServer(): Promise<void> {
@@ -46,7 +64,7 @@ export async function startMcpServer(): Promise<void> {
   }, () => {
     const list = regionManager.listRegions()
     if (list.length === 0) return { content: [{ type: "text", text: "暂无已保存的区域" }] }
-    const lines = list.map(r => `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")})`)
+    const lines = list.map(r => `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")}) [${regionSize(r)}]`)
     return { content: [{ type: "text", text: lines.join("\n") }] }
   })
 
@@ -61,11 +79,7 @@ export async function startMcpServer(): Promise<void> {
     if (!gl?.connected) return notConnected()
     const r = regionManager.regions.get(args.name)
     if (!r) return { content: [{ type: "text", text: `找不到区域 ${args.name}` }], isError: true }
-    const [mx, Mx] = r.p1[0] < r.p2[0] ? [r.p1[0], r.p2[0]] : [r.p2[0], r.p1[0]]
-    const [my, My] = r.p1[1] < r.p2[1] ? [r.p1[1], r.p2[1]] : [r.p2[1], r.p1[1]]
-    const [mz, Mz] = r.p1[2] < r.p2[2] ? [r.p1[2], r.p2[2]] : [r.p2[2], r.p1[2]]
-    const size = `${Mx - mx + 1}×${My - my + 1}×${Mz - mz + 1}`
-    return { content: [{ type: "text", text: `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")}) [${size}]` }] }
+    return { content: [{ type: "text", text: `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")}) [${regionSize(r)}]` }] }
   })
 
   mcp.registerTool("mcbe_delete_region", {
@@ -81,6 +95,33 @@ export async function startMcpServer(): Promise<void> {
       return { content: [{ type: "text", text: `区域 ${args.name} 已删除` }] }
     }
     return { content: [{ type: "text", text: `找不到区域 ${args.name}` }], isError: true }
+  })
+
+  mcp.registerTool("mcbe_get_player_info", {
+    title: "Get Player Info",
+    description: "获取 MCBE 游戏中玩家的位置、朝向和所在维度",
+    inputSchema: z.object({}),
+  }, async () => {
+    const gl = GameLoop.instance
+    if (!gl?.connected) return notConnected()
+    try {
+      const r = await gl.exec(`querytarget @a[name=${gl.playerName},c=1]`)
+      const raw = r.statusMessage
+      const s = raw.indexOf("[")
+      const e = raw.lastIndexOf("]")
+      if (s < 0 || e < 0) return { content: [{ type: "text", text: "无法解析玩家数据" }], isError: true }
+      const arr = JSON.parse(raw.slice(s, e + 1)) as Array<{ position: { x: number; y: number; z: number }; dimension: number; yRot: number }>
+      if (!Array.isArray(arr) || arr.length === 0) return { content: [{ type: "text", text: "找不到玩家" }], isError: true }
+      const first = arr[0] as { position: { x: number; y: number; z: number }; dimension: number; yRot: number }
+      const p = first.position
+      const dimNames = ["overworld", "nether", "the end"]
+      const dim = dimNames[first.dimension] ?? `dim ${first.dimension}`
+      const dir = dirFromYaw(first.yRot)
+      const lines = [`${gl.playerName} @ ${dim}`, `位置: (${p.x.toFixed(1)}, ${p.y.toFixed(1)}, ${p.z.toFixed(1)})`, `朝向: ${dir} (yaw: ${first.yRot.toFixed(1)})`]
+      return { content: [{ type: "text", text: lines.join("\n") }] }
+    } catch (e: unknown) {
+      return { content: [{ type: "text", text: `查询失败: ${(e as Error).message}` }], isError: true }
+    }
   })
 
   mcp.registerTool("mcbe_scan_region", {

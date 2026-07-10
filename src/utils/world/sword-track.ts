@@ -64,7 +64,6 @@ export class SwordTracker {
       if (!this.holding && had) {
         gl.fire(`kill @e[name=${MARKER}]`)
         this.lastTargetPos = null
-        this.selectState = "p1"
         return
       }
       if (!this.holding) return
