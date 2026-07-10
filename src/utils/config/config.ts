@@ -1,10 +1,9 @@
 import { readFileSync, existsSync } from "fs"
-import { join, resolve } from "path"
-import { fileURLToPath } from "url"
+import { join } from "path"
 import { log } from "../logger.js"
+import { PROJECT_ROOT } from "../paths.js"
 
-const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "..", "..", "..")
-const CONFIG_PATH = join(ROOT, "config.json")
+const CONFIG_PATH = join(PROJECT_ROOT, "config.json")
 
 type Vec3 = [number, number, number]
 

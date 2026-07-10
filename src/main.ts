@@ -1,6 +1,5 @@
 import { readFileSync, existsSync } from "fs"
-import { join, resolve } from "path"
-import { fileURLToPath } from "url"
+import { join } from "path"
 import { Server, ServerEvent } from "socket-be"
 import { GameLoop } from "./utils/core/game-loop.js"
 import { log } from "./utils/logger.js"
@@ -16,8 +15,8 @@ import { tickingList, tickingEnsure, tickingFillChunk } from "./utils/world/tick
 import { SwordTracker } from "./utils/world/sword-track.js"
 import { RegionDeleter } from "./utils/world/region-deleter.js"
 import { waterlogCheck, waterlogBatch } from "./utils/world/waterlog.js"
-
-const DATA_DIR = resolve(fileURLToPath(new URL(".", import.meta.url)), "data")
+import { startMcpServer } from "./utils/mcp-server.js"
+import { DATA_DIR } from "./utils/paths.js"
 
 const config = loadConfig()
 let port: number
@@ -33,6 +32,10 @@ const gl = new GameLoop(server, 100)
 gl.playerName = config.playerName
 const swordTracker = new SwordTracker()
 const regionDeleter = new RegionDeleter()
+
+startMcpServer().catch((e: unknown) => {
+  log.error("MCP 服务器启动失败: " + (e as Error).message)
+})
 
 server.on(ServerEvent.ItemInteracted, (ev) => {
   swordTracker.onItemInteracted(ev)

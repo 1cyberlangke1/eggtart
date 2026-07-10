@@ -1,17 +1,17 @@
 import { writeFileSync, mkdirSync } from "fs"
-import { join, resolve } from "path"
-import { fileURLToPath } from "url"
+import { join } from "path"
 import { GameLoop } from "../core/game-loop.js"
 import { type Region } from "./region.js"
 import { waterlogBatch } from "./waterlog.js"
+import { PROJECT_ROOT } from "../paths.js"
 
-const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "..", "..", "..")
-const STRUCT_DIR = join(ROOT, "struct")
+const STRUCT_DIR = join(PROJECT_ROOT, "struct")
 
 export interface ScanOptions {
   name?: string | undefined
   states?: boolean | undefined
   waterlog?: boolean | undefined
+  outputDir?: string | undefined
 }
 
 export interface PaletteEntry {
@@ -240,12 +240,14 @@ export async function scanRegion(
       blocks,
     }
 
-    mkdirSync(STRUCT_DIR, { recursive: true })
-    writeFileSync(join(STRUCT_DIR, `${name}.json`), JSON.stringify(result, null, 2))
+    const outDir = opts.outputDir ?? STRUCT_DIR
+    mkdirSync(outDir, { recursive: true })
+    writeFileSync(join(outDir, `${name}.json`), JSON.stringify(result, null, 2))
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1)
+    const actualDir = opts.outputDir ?? "struct"
     const summary = truncate(
-      `扫描完成: ${result.total} 个非空气方块, ${palette.length} 种, 耗时 ${elapsed}s, 已保存到 struct/${name}.json`
+      `扫描完成: ${result.total} 个非空气方块, ${palette.length} 种, 耗时 ${elapsed}s, 已保存到 ${actualDir}/${name}.json`
     )
 
     return { result, summary }

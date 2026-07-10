@@ -37,6 +37,9 @@ export class GameLoop {
   waterloggableBlocks: Set<string> | null = null
 
   private world: World | null = null
+  get connected(): boolean {
+    return this.world !== null
+  }
   readonly maxPending: number
   private publicQueue: ExecItem[] = []
   private publicAwaited = 0

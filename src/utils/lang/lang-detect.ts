@@ -1,10 +1,8 @@
 import { readFileSync, existsSync, readdirSync } from "fs"
-import { join, resolve } from "path"
-import { fileURLToPath } from "url"
+import { join } from "path"
 import { CmdParser } from "../reader/cmd-parser.js"
 import { log } from "../logger.js"
-
-const DATA_DIR = resolve(fileURLToPath(new URL(".", import.meta.url)), "..", "..", "data")
+import { DATA_DIR } from "../paths.js"
 
 // 只存 footer 原文 → 语言名，不存完整 commands
 const footerMap = new Map<string, string>()
