@@ -35,15 +35,15 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_create_region_at", {
     title: "Create MCBE Region",
-    description: "框选两个坐标点并创建区域",
+    description: "Create a cuboid region from two corner coordinates",
     inputSchema: z.object({
-      x1: z.number().describe("点1 X 坐标"),
-      y1: z.number().describe("点1 Y 坐标"),
-      z1: z.number().describe("点1 Z 坐标"),
-      x2: z.number().describe("点2 X 坐标"),
-      y2: z.number().describe("点2 Y 坐标"),
-      z2: z.number().describe("点2 Z 坐标"),
-      name: z.string().optional().describe("区域名称，缺省自动生成"),
+      x1: z.number().describe("Corner 1 X"),
+      y1: z.number().describe("Corner 1 Y"),
+      z1: z.number().describe("Corner 1 Z"),
+      x2: z.number().describe("Corner 2 X"),
+      y2: z.number().describe("Corner 2 Y"),
+      z2: z.number().describe("Corner 2 Z"),
+      name: z.string().optional().describe("Region name, auto-generated if omitted"),
     }),
   }, (args) => {
     const gl = GameLoop.instance
@@ -59,7 +59,7 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_list_regions", {
     title: "List MCBE Regions",
-    description: "列出 MCBE 游戏中所有已保存的区域",
+    description: "List all saved regions with positions and sizes",
     inputSchema: z.object({}),
   }, () => {
     const list = regionManager.listRegions()
@@ -70,9 +70,9 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_get_region", {
     title: "Get MCBE Region",
-    description: "查询 MCBE 游戏中指定区域的坐标和大小",
+    description: "Get region details: coordinates, dimensions, and volume",
     inputSchema: z.object({
-      name: z.string().describe("区域名称"),
+      name: z.string().describe("Region name"),
     }),
   }, (args) => {
     const gl = GameLoop.instance
@@ -84,9 +84,9 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_delete_region", {
     title: "Delete MCBE Region",
-    description: "删除 MCBE 游戏中指定名称的区域",
+    description: "Delete a region by name",
     inputSchema: z.object({
-      name: z.string().describe("要删除的区域名称"),
+      name: z.string().describe("Region name to delete"),
     }),
   }, (args) => {
     const gl = GameLoop.instance
@@ -99,7 +99,7 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_get_player_info", {
     title: "Get Player Info",
-    description: "获取 MCBE 游戏中玩家的位置、朝向和所在维度",
+    description: "Get player position, facing direction, and dimension",
     inputSchema: z.object({}),
   }, async () => {
     const gl = GameLoop.instance
@@ -126,12 +126,12 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_scan_region", {
     title: "Scan MCBE Region",
-    description: "重量级操作，仅用户明确要求扫描时调用，优先复用已有扫描文件。结果保存到本地文件。",
+    description: "Heavy operation: scan every block in a region and save results to a JSON file. Only call when user explicitly requests scanning. Reuses existing scan files when possible.",
     inputSchema: z.object({
-      name: z.string().describe("区域名称"),
-      path: z.string().describe("保存路径，支持 ~ 开头，Windows 用 forward slash（如 C:/Users/xxx/Desktop）"),
-      states: z.boolean().optional().default(true).describe("是否检测方块状态"),
-      waterlog: z.boolean().optional().default(true).describe("是否检测含水"),
+      name: z.string().describe("Region name to scan"),
+      path: z.string().describe("Output directory (supports ~ for home, use forward slashes, e.g. C:/Users/xxx/Desktop)"),
+      states: z.boolean().optional().default(true).describe("Detect block states"),
+      waterlog: z.boolean().optional().default(true).describe("Detect waterlogged blocks"),
     }),
   }, async (args) => {
     const gl = GameLoop.instance
@@ -149,9 +149,9 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_run_command", {
     title: "Run MCBE Command",
-    description: "在游戏中执行一条 MCBE 命令并返回游戏输出的原始文本",
+    description: "Execute any Minecraft command and return raw output as seen in-game",
     inputSchema: z.object({
-      command: z.string().describe("要执行的 Minecraft 命令，不需要前导斜杠"),
+      command: z.string().describe("Minecraft command without leading slash"),
     }),
   }, async (args) => {
     const gl = GameLoop.instance
@@ -166,11 +166,11 @@ export async function startMcpServer(): Promise<void> {
 
   mcp.registerTool("mcbe_run_script", {
     title: "Run MCBE Script",
-    description: "在指定区域内执行自定义脚本。脚本中用相对坐标（0,0,0=区域最小角）放置方块，提供 setBlock(rx,ry,rz,blockId,states?) 和 fillBlock(rx1,ry1,rz1,rx2,ry2,rz2,blockId,states?) 两个函数。支持循环、条件、变量。",
+    description: "Execute a JS script inside a region. Coordinates are relative (0,0,0 = region min corner). Provides setBlock(rx,ry,rz,blockId,states?) and fillBlock(rx1,ry1,rz1,rx2,ry2,rz2,blockId,states?). Supports loops, conditionals, variables.",
     inputSchema: z.object({
-      name: z.string().describe("区域名称"),
-      script: z.string().describe("JavaScript 脚本代码，支持 setBlock 和 fillBlock 两个全局函数"),
-      timeout: z.number().optional().default(30).describe("超时秒数"),
+      name: z.string().describe("Target region name"),
+      script: z.string().describe("JavaScript code using setBlock() and fillBlock() globals"),
+      timeout: z.number().optional().default(30).describe("Timeout in seconds"),
     }),
   }, (args) => {
     const gl = GameLoop.instance
