@@ -159,7 +159,7 @@ export async function startMcpServer(port: number = 0): Promise<void> {
 
   mcp.registerTool("mcbe_run_command", {
     title: "Run MCBE Command",
-    description: "Execute any Minecraft command and return raw output as seen in-game",
+    description: "Execute any Minecraft command and return raw output as seen in-game. For setblock/fill use JSON states, e.g. 'setblock ~ ~ ~ minecraft:oak_stairs {\"weirdo_direction\":0,\"upside_down_bit\":true}'. Common: facing_direction(0-5=down/up/north/south/west/east), weirdo_direction(0-3), upside_down_bit(true/false), open_bit(true/false), pillar_axis(x/y/z), direction(0-3).",
     inputSchema: z.object({
       command: z.string().describe("Minecraft command without leading slash"),
     }),
@@ -176,7 +176,7 @@ export async function startMcpServer(port: number = 0): Promise<void> {
 
   mcp.registerTool("mcbe_run_script", {
     title: "Run MCBE Script",
-    description: "Execute a JS script inside a region. Coordinates are relative (0,0,0 = region min corner). Provides setBlock(rx,ry,rz,blockId,states?) and fillBlock(rx1,ry1,rz1,rx2,ry2,rz2,blockId,states?). Supports loops, conditionals, variables.",
+    description: "Execute a JS script inside a region. Coordinates are relative (0,0,0 = region min corner). Provides setBlock(rx,ry,rz,blockId,states?) and fillBlock(rx1,ry1,rz1,rx2,ry2,rz2,blockId,states?). Supports loops, conditionals, variables. Common MCBE block states: facing_direction(0-5=down/up/north/south/west/east), weirdo_direction(0-3), upside_down_bit(true/false), open_bit(true/false), pillar_axis(x/y/z), direction(0-3). Example: setBlock(0,0,0,'minecraft:oak_stairs',{weirdo_direction:0,upside_down_bit:true})",
     inputSchema: z.object({
       name: z.string().describe("Target region name"),
       script: z.string().describe("JavaScript code using setBlock() and fillBlock() globals"),
