@@ -10,8 +10,11 @@ import { runScript } from "./world/script-runner.js"
 
 type RegionInfo = { name: string; p1: [number, number, number]; p2: [number, number, number] }
 
+let mcpPort = 0
+
 function notConnected(): { content: Array<{ type: "text"; text: string }>; isError: true } {
-  return { content: [{ type: "text", text: "游戏未连接" }], isError: true }
+  const hint = mcpPort ? `请在游戏中执行 /wsserver localhost:${mcpPort} 连接后重试` : "请先连接游戏后重试"
+  return { content: [{ type: "text", text: `游戏未连接。${hint}` }], isError: true }
 }
 
 function regionSize(r: RegionInfo): string {
@@ -30,7 +33,8 @@ function dirFromYaw(yRot: number): string {
   return dirs[Math.round(deg / 45) % 8] as string
 }
 
-export async function startMcpServer(): Promise<void> {
+export async function startMcpServer(port: number = 0): Promise<void> {
+  mcpPort = port
   const mcp = new McpServer({ name: "mcbe-eggtart", version: "1.0.0" })
 
   mcp.registerTool("mcbe_create_region_at", {
@@ -48,8 +52,12 @@ export async function startMcpServer(): Promise<void> {
   }, (args) => {
     const gl = GameLoop.instance
     if (!gl?.connected) return notConnected()
-    regionManager.setP1(args.x1, args.y1, args.z1)
-    regionManager.setP2(args.x2, args.y2, args.z2)
+    if (!regionManager.setP1(args.x1, args.y1, args.z1)) {
+      return { content: [{ type: "text", text: "点1 在常加载区块内，请选其他位置" }], isError: true }
+    }
+    if (!regionManager.setP2(args.x2, args.y2, args.z2)) {
+      return { content: [{ type: "text", text: "点2 在常加载区块内，请选其他位置" }], isError: true }
+    }
     const r = regionManager.createRegion(args.name)
     if (r === null) return { content: [{ type: "text", text: "区域创建失败" }], isError: true }
     if (r === "too_large") return { content: [{ type: "text", text: `区域过大，上限 ${regionManager.regionMaxSize[0]}×${regionManager.regionMaxSize[1]}×${regionManager.regionMaxSize[2]}` }], isError: true }
@@ -62,6 +70,8 @@ export async function startMcpServer(): Promise<void> {
     description: "List all saved regions with positions and sizes",
     inputSchema: z.object({}),
   }, () => {
+    const gl = GameLoop.instance
+    if (!gl?.connected) return notConnected()
     const list = regionManager.listRegions()
     if (list.length === 0) return { content: [{ type: "text", text: "暂无已保存的区域" }] }
     const lines = list.map(r => `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")}) [${regionSize(r)}]`)

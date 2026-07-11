@@ -115,14 +115,20 @@ export class SwordTracker {
 
       switch (this.selectState) {
         case "p1":
-          regionManager.setP1(x, y, z)
+          if (!regionManager.setP1(x, y, z)) {
+            gl?.fire(`title @a actionbar §c常加载区块内禁用选点`)
+            return
+          }
           log.success(`点1 已设 (${x},${y},${z})`, { prefix: "Sword" })
           gl?.fire(`title @a actionbar §a点1 已选: ${x} ${y} ${z}`)
           this.selectState = "p2"
           break
 
         case "p2":
-          regionManager.setP2(x, y, z)
+          if (!regionManager.setP2(x, y, z)) {
+            gl?.fire(`title @a actionbar §c常加载区块内禁用选点`)
+            return
+          }
           log.success(`点2 已设 (${x},${y},${z})`, { prefix: "Sword" })
           gl?.fire(`title @a actionbar §a点2 已选: ${x} ${y} ${z}`)
           this.selectState = "create"

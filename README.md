@@ -1,5 +1,7 @@
 # EggTart 🥚
 
+<picture><img alt="EggTart" src="docs/logo.png" width="64" align="left" style="margin-right: 12px"></picture>
+
 MCBE WebSocket 工具集 — 区域管理、建造、查询、MCP 服务
 
 ## 功能

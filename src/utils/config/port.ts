@@ -27,3 +27,17 @@ export function findFreePort(): Promise<number> {
     srv.on("error", reject)
   })
 }
+
+export function checkPortAvailable(port: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const srv = createServer()
+    srv.once("error", () => {
+      resolve(false)
+    })
+    srv.once("listening", () => {
+      srv.close()
+      resolve(true)
+    })
+    srv.listen(port)
+  })
+}

@@ -4,7 +4,7 @@ import { Server, ServerEvent } from "socket-be"
 import { GameLoop } from "./utils/core/game-loop.js"
 import { log } from "./utils/logger.js"
 import { loadConfig } from "./utils/config/config.js"
-import { findFreePort } from "./utils/config/port.js"
+import { findFreePort, checkPortAvailable } from "./utils/config/port.js"
 import { detectLanguage } from "./utils/lang/lang-detect.js"
 import { registerChatCommands, cmd, str, optStr, optBool } from "./utils/chat/chat-handler.js"
 import { coord, optCoord, resolveCoords } from "./utils/coord.js"
@@ -25,6 +25,10 @@ if (config.port === "auto") {
   port = await findFreePort()
 } else {
   port = parseInt(config.port)
+  if (!(await checkPortAvailable(port))) {
+    log.error(`端口 ${port} 已被占用`)
+    process.exit(1)
+  }
 }
 
 const server = new Server({ port })
@@ -33,7 +37,7 @@ gl.playerName = config.playerName
 const swordTracker = new SwordTracker()
 const regionDeleter = new RegionDeleter()
 
-startMcpServer().catch((e: unknown) => {
+startMcpServer(port).catch((e: unknown) => {
   log.error("MCP 服务器启动失败: " + (e as Error).message)
 })
 
@@ -77,13 +81,13 @@ registerChatCommands(server, [
   cmd("setp1", [optCoord("x"), optCoord("y"), optCoord("z")], async (x, y, z) => {
     const [px, py, pz] = await resolveCoords(x, y, z)
     if (px === undefined || py === undefined || pz === undefined) return "无法解析坐标"
-    regionManager.setP1(px, py, pz)
+    if (!regionManager.setP1(px, py, pz)) return "该位置在常加载区块内，请选其他位置"
     return `点1 已设 (${px},${py},${pz})`
   }, "选择点1（缺省用当前位置）"),
   cmd("setp2", [optCoord("x"), optCoord("y"), optCoord("z")], async (x, y, z) => {
     const [px, py, pz] = await resolveCoords(x, y, z)
     if (px === undefined || py === undefined || pz === undefined) return "无法解析坐标"
-    regionManager.setP2(px, py, pz)
+    if (!regionManager.setP2(px, py, pz)) return "该位置在常加载区块内，请选其他位置"
     return `点2 已设 (${px},${py},${pz})`
   }, "选择点2（缺省用当前位置）"),
   cmd("create", [optStr("name")], (name) => {
@@ -175,6 +179,8 @@ server.on(ServerEvent.WorldInitialize, async () => {
   }
 
   regionManager.regionMaxSize = config.regionMaxSize
+  regionManager.tickingAreaFrom = ta.from
+  regionManager.tickingAreaTo = ta.to
   regionManager.createLanes()
   log.info(`区域最大范围: ${config.regionMaxSize.join("×")}`, { color: "gray" })
 

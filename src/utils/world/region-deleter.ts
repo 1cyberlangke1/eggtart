@@ -141,6 +141,11 @@ export class RegionDeleter {
         return
       }
 
+      if (regionManager.isInTickingArea(x, y, z)) {
+        gl?.fire(`title @a actionbar §c常加载区块内禁用删除: ${x} ${y} ${z}`)
+        return
+      }
+
       regionManager.deleteRegion(region.name)
       log.success(`已删除区域 ${region.name} (${x},${y},${z})`, { color: "red", prefix: "Del" })
       gl?.fire(`title @a actionbar §a已删除区域 ${region.name}`)

@@ -82,6 +82,8 @@ class RegionManager {
   currentP2: [number, number, number] | null = null
   readonly regions = new Map<string, Region>()
   regionMaxSize: [number, number, number] = [50, 50, 50]
+  tickingAreaFrom: [number, number, number] | null = null
+  tickingAreaTo: [number, number, number] | null = null
   private p1Lane: Lane | null = null
   private p2Lane: Lane | null = null
   private regionLane: Lane | null = null
@@ -109,18 +111,29 @@ class RegionManager {
     this.regionData.clear()
   }
 
-  setP1(x: number, y: number, z: number): void {
+  isInTickingArea(x: number, y: number, z: number): boolean {
+    if (!this.tickingAreaFrom || !this.tickingAreaTo) return false
+    return x >= this.tickingAreaFrom[0] && x <= this.tickingAreaTo[0]
+      && y >= this.tickingAreaFrom[1] && y <= this.tickingAreaTo[1]
+      && z >= this.tickingAreaFrom[2] && z <= this.tickingAreaTo[2]
+  }
+
+  setP1(x: number, y: number, z: number): boolean {
+    if (this.isInTickingArea(x, y, z)) return false
     this.currentP1 = [x, y, z]
     this.clearP1Timer()
     this.refreshP1()
     this.p1Timer = setInterval(() => { this.refreshP1() }, REFRESH_MS)
+    return true
   }
 
-  setP2(x: number, y: number, z: number): void {
+  setP2(x: number, y: number, z: number): boolean {
+    if (this.isInTickingArea(x, y, z)) return false
     this.currentP2 = [x, y, z]
     this.clearP2Timer()
     this.refreshP2()
     this.p2Timer = setInterval(() => { this.refreshP2() }, REFRESH_MS)
+    return true
   }
 
   createRegion(name?: string): Region | null | "too_large" | "max_regions" {
