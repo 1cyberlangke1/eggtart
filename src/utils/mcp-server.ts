@@ -4,6 +4,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod"
 import { GameLoop } from "./core/game-loop.js"
 import { log } from "./logger.js"
+import { handleCreateRegionAt, handleDelRegion, handleListRegions } from "./chat/cmd-handlers.js"
 import { regionManager } from "./world/region.js"
 import { scanRegion } from "./world/scanner.js"
 import { runScript } from "./world/script-runner.js"
@@ -49,21 +50,12 @@ export async function startMcpServer(port: number = 0): Promise<void> {
       z2: z.number().describe("Corner 2 Z"),
       name: z.string().optional().describe("Region name, auto-generated if omitted"),
     }),
-  }, (args) => {
+  }, async (args) => {
     const gl = GameLoop.instance
     if (!gl?.connected) return notConnected()
-    if (!regionManager.setP1(args.x1, args.y1, args.z1)) {
-      return { content: [{ type: "text", text: "点1 在常加载区块内，请选其他位置" }], isError: true }
-    }
-    if (!regionManager.setP2(args.x2, args.y2, args.z2)) {
-      return { content: [{ type: "text", text: "点2 在常加载区块内，请选其他位置" }], isError: true }
-    }
-    const r = regionManager.createRegion(args.name)
-    if (r === null) return { content: [{ type: "text", text: "区域创建失败" }], isError: true }
-    if (r === "too_large") return { content: [{ type: "text", text: `区域过大，上限 ${regionManager.regionMaxSize[0]}×${regionManager.regionMaxSize[1]}×${regionManager.regionMaxSize[2]}` }], isError: true }
-    if (r === "max_regions") return { content: [{ type: "text", text: "最多 5 个区域" }], isError: true }
-    if (r === "overlaps_ticking") return { content: [{ type: "text", text: "区域与常加载区块重叠，请调整区域范围" }], isError: true }
-    return { content: [{ type: "text", text: `区域 ${r.name} 已创建 (${r.p1.join(",")} ~ ${r.p2.join(",")})` }] }
+    const msg = await handleCreateRegionAt(args.x1, args.y1, args.z1, args.x2, args.y2, args.z2, args.name)
+    if (msg !== null) return { content: [{ type: "text", text: msg }], isError: true }
+    return { content: [{ type: "text", text: "区域已创建" }] }
   })
 
   mcp.registerTool("mcbe_list_regions", {
@@ -73,10 +65,7 @@ export async function startMcpServer(port: number = 0): Promise<void> {
   }, () => {
     const gl = GameLoop.instance
     if (!gl?.connected) return notConnected()
-    const list = regionManager.listRegions()
-    if (list.length === 0) return { content: [{ type: "text", text: "暂无已保存的区域" }] }
-    const lines = list.map(r => `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")}) [${regionSize(r)}]`)
-    return { content: [{ type: "text", text: lines.join("\n") }] }
+    return { content: [{ type: "text", text: handleListRegions() }] }
   })
 
   mcp.registerTool("mcbe_get_region", {
@@ -99,13 +88,12 @@ export async function startMcpServer(port: number = 0): Promise<void> {
     inputSchema: z.object({
       name: z.string().describe("Region name to delete"),
     }),
-  }, (args) => {
+  }, async (args) => {
     const gl = GameLoop.instance
     if (!gl?.connected) return notConnected()
-    if (regionManager.deleteRegion(args.name)) {
-      return { content: [{ type: "text", text: `区域 ${args.name} 已删除` }] }
-    }
-    return { content: [{ type: "text", text: `找不到区域 ${args.name}` }], isError: true }
+    const msg = await handleDelRegion(args.name)
+    if (msg !== null) return { content: [{ type: "text", text: msg }], isError: true }
+    return { content: [{ type: "text", text: `区域 ${args.name} 已删除` }] }
   })
 
   mcp.registerTool("mcbe_get_player_info", {
@@ -143,6 +131,7 @@ export async function startMcpServer(port: number = 0): Promise<void> {
       path: z.string().describe("Output directory (supports ~ for home, use forward slashes, e.g. C:/Users/xxx/Desktop)"),
       states: z.boolean().optional().default(true).describe("Detect block states"),
       waterlog: z.boolean().optional().default(true).describe("Detect waterlogged blocks"),
+      normalize: z.boolean().optional().default(false).describe("Normalize coordinates to region origin"),
     }),
   }, async (args) => {
     const gl = GameLoop.instance
@@ -151,7 +140,7 @@ export async function startMcpServer(port: number = 0): Promise<void> {
     if (!region) return { content: [{ type: "text", text: `找不到区域 ${args.name}` }], isError: true }
     const resolvedPath = resolve(args.path.replace(/^~/, process.env.USERPROFILE ?? process.env.HOME ?? ""))
     try {
-      const { summary } = await scanRegion(region, { name: region.name, states: args.states, waterlog: args.waterlog, outputDir: resolvedPath })
+      const { summary } = await scanRegion(region, { name: region.name, states: args.states, waterlog: args.waterlog, normalize: args.normalize, outputDir: resolvedPath })
       return { content: [{ type: "text", text: summary }] }
     } catch (e: unknown) {
       return { content: [{ type: "text", text: `扫描失败: ${(e as Error).message}` }], isError: true }

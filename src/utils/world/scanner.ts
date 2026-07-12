@@ -12,6 +12,7 @@ export interface ScanOptions {
   states?: boolean | undefined
   waterlog?: boolean | undefined
   outputDir?: string | undefined
+  normalize?: boolean | undefined
 }
 
 export interface PaletteEntry {
@@ -34,6 +35,7 @@ export interface ScanResult {
   total: number
   palette: PaletteEntry[]
   blocks: BlockEntry[]
+  origin?: [number, number, number]
 }
 
 const MAX_CHAT = 500
@@ -150,6 +152,7 @@ export async function scanRegion(
     const name = opts.name ?? `scan_${Date.now()}`
     const doStates = opts.states ?? true
     const doWaterlog = opts.waterlog ?? true
+    const doNormalize = opts.normalize ?? false
 
     const [mx, Mx] = region.p1[0] < region.p2[0] ? [region.p1[0], region.p2[0]] : [region.p2[0], region.p1[0]]
     const [my, My] = region.p1[1] < region.p2[1] ? [region.p1[1], region.p2[1]] : [region.p2[1], region.p1[1]]
@@ -231,6 +234,14 @@ export async function scanRegion(
       blocks.push({ x, y, z, p: pIdx })
     }
 
+    if (doNormalize) {
+      for (const b of blocks) {
+        b.x -= mx
+        b.y -= my
+        b.z -= mz
+      }
+    }
+
     const result: ScanResult = {
       name,
       size: [sizeX, sizeY, sizeZ],
@@ -238,6 +249,7 @@ export async function scanRegion(
       total: blocks.length,
       palette,
       blocks,
+      origin: [mx, my, mz],
     }
 
     const outDir = opts.outputDir ?? STRUCT_DIR
@@ -246,8 +258,9 @@ export async function scanRegion(
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1)
     const actualDir = opts.outputDir ?? "struct"
+    const normFlag = doNormalize ? "（坐标已归零）" : ""
     const summary = truncate(
-      `扫描完成: ${result.total} 个非空气方块, ${palette.length} 种, 耗时 ${elapsed}s, 已保存到 ${actualDir}/${name}.json`
+      `扫描完成: ${result.total} 个非空气方块, ${palette.length} 种, 耗时 ${elapsed}s, 已保存到 ${actualDir}/${name}.json${normFlag}`
     )
 
     return { result, summary }

@@ -8,6 +8,7 @@ import { findFreePort, checkPortAvailable } from "./utils/config/port.js"
 import { detectLanguage } from "./utils/lang/lang-detect.js"
 import { registerChatCommands, cmd, str, optStr, optBool } from "./utils/chat/chat-handler.js"
 import { coord, optCoord, resolveCoords } from "./utils/coord.js"
+import { handleSetp1, handleSetp2, handleCreate, handleDelRegion, handleListRegions } from "./utils/chat/cmd-handlers.js"
 import { getBlockWithStates } from "./utils/world/block-utils.js"
 import { regionManager } from "./utils/world/region.js"
 import { scanRegion } from "./utils/world/scanner.js"
@@ -81,47 +82,31 @@ registerChatCommands(server, [
   cmd("setp1", [optCoord("x"), optCoord("y"), optCoord("z")], async (x, y, z) => {
     const [px, py, pz] = await resolveCoords(x, y, z)
     if (px === undefined || py === undefined || pz === undefined) return "无法解析坐标"
-    if (!regionManager.setP1(px, py, pz)) return "该位置在常加载区块内，请选其他位置"
-    return `点1 已设 (${px},${py},${pz})`
+    return handleSetp1(px, py, pz)
   }, "选择点1（缺省用当前位置）"),
   cmd("setp2", [optCoord("x"), optCoord("y"), optCoord("z")], async (x, y, z) => {
     const [px, py, pz] = await resolveCoords(x, y, z)
     if (px === undefined || py === undefined || pz === undefined) return "无法解析坐标"
-    if (!regionManager.setP2(px, py, pz)) return "该位置在常加载区块内，请选其他位置"
-    return `点2 已设 (${px},${py},${pz})`
+    return handleSetp2(px, py, pz)
   }, "选择点2（缺省用当前位置）"),
-  cmd("create", [optStr("name")], (name) => {
-    const r = regionManager.createRegion(name)
-    if (r === null) return Promise.resolve(null)
-    if (r === "too_large") return Promise.resolve(`区域过大，上限 ${config.regionMaxSize[0]}×${config.regionMaxSize[1]}×${config.regionMaxSize[2]}`)
-    if (r === "max_regions") return Promise.resolve(`最多 5 个区域`)
-    if (r === "overlaps_ticking") return Promise.resolve("区域与常加载区块重叠，请调整区域范围")
-    return Promise.resolve(`区域 ${r.name} 已创建 (${r.p1.join(",")} ~ ${r.p2.join(",")})`)
-  }, "创建区域（缺省名自动生成）"),
-  cmd("regions", [], () => {
-    const list = regionManager.listRegions()
-    if (list.length === 0) return Promise.resolve("暂无已保存的区域")
-    return Promise.resolve(list.map(r => `${r.name}: (${r.p1.join(",")}) ~ (${r.p2.join(",")})`).join("\n"))
-  }, "列出所有区域"),
-  cmd("delRegion", [str("name")], (name) => {
-    if (regionManager.deleteRegion(name)) return Promise.resolve(`区域 ${name} 已删除`)
-    return Promise.resolve(`找不到区域 ${name}`)
-  }, "删除指定区域"),
+  cmd("create", [optStr("name")], (name) => handleCreate(name), "创建区域（缺省名自动生成）"),
+  cmd("regions", [], () => Promise.resolve(handleListRegions()), "列出所有区域"),
+  cmd("delRegion", [str("name")], (name) => handleDelRegion(name), "删除指定区域"),
   cmd("sword", [optBool("enabled")], (enabled?) => {
     const v = enabled !== undefined ? enabled : !swordTracker.enabled
     swordTracker.setEnabled(v)
     return Promise.resolve(v ? "剑追踪已开启" : "剑追踪已关闭")
   }, "剑追踪开关（默认开启）"),
-  cmd("scanRegion", [str("name"), optBool("states"), optBool("waterlog")], async (name, states?, waterlog?) => {
+  cmd("scanRegion", [str("name"), optBool("states"), optBool("waterlog"), optBool("normalize")], async (name, states?, waterlog?, normalize?) => {
     const region = regionManager.regions.get(name)
     if (!region) return "找不到区域 " + name
     try {
-      const { summary } = await scanRegion(region, { name, states, waterlog })
+      const { summary } = await scanRegion(region, { name, states, waterlog, normalize })
       return summary
     } catch (e: unknown) {
       return `扫描失败: ${(e as Error).message}`
     }
-  }, "扫描区域方块信息并保存到文件"),
+  }, "扫描区域方块信息并保存到文件[normalize: 坐标归零]"),
 ])
 
 server.on(ServerEvent.Open, () => {
