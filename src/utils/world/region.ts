@@ -1,4 +1,5 @@
 import { GameLoop, Lane } from "../core/game-loop.js"
+import { log } from "../logger.js"
 
 const PARTICLE_ENDROD = "minecraft:endrod"
 const EDGE_STEP = 0.5
@@ -124,6 +125,7 @@ class RegionManager {
     this.clearP1Timer()
     this.refreshP1()
     this.p1Timer = setInterval(() => { this.refreshP1() }, REFRESH_MS)
+    log.success(`点1 已设 (${x},${y},${z})`)
     return true
   }
 
@@ -133,6 +135,7 @@ class RegionManager {
     this.clearP2Timer()
     this.refreshP2()
     this.p2Timer = setInterval(() => { this.refreshP2() }, REFRESH_MS)
+    log.success(`点2 已设 (${x},${y},${z})`)
     return true
   }
 
@@ -170,6 +173,7 @@ class RegionManager {
     this.clearP1Timer()
     this.clearP2Timer()
 
+    log.success(`区域 ${n} 已创建 (${region.p1.join(",")} ~ ${region.p2.join(",")})`)
     this.refreshAll()
     const timer = setInterval(() => { this.refreshAll() }, REFRESH_MS)
     this.regionData.set(n, { timer })
@@ -183,7 +187,10 @@ class RegionManager {
       this.regionData.delete(name)
     }
     const ok = this.regions.delete(name)
-    if (ok) this.refreshAll()
+    if (ok) {
+      this.refreshAll()
+      log.success(`区域 ${name} 已删除`)
+    }
     return ok
   }
 

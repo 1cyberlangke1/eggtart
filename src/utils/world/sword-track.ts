@@ -1,7 +1,6 @@
 import { ItemInteractMethod, type ItemInteractedSignal } from "socket-be"
 import { GameLoop } from "../core/game-loop.js"
 import { regionManager, boxEdges } from "./region.js"
-import { log } from "../logger.js"
 
 const MARKER = "eggtart_marker"
 const TP_INTERVAL = 300
@@ -126,7 +125,6 @@ export class SwordTracker {
             gl.fire(`title @a actionbar §c选区失败`)
             return
           }
-          log.success(`点1 已设 (${x},${y},${z})`, { prefix: "Sword" })
           gl.fire(`title @a actionbar §a点1 已选: ${x} ${y} ${z}`)
           this.selectState = "p2"
           break
@@ -136,7 +134,6 @@ export class SwordTracker {
             gl.fire(`title @a actionbar §c选区失败`)
             return
           }
-          log.success(`点2 已设 (${x},${y},${z})`, { prefix: "Sword" })
           gl.fire(`title @a actionbar §a点2 已选: ${x} ${y} ${z}`)
           this.selectState = "create"
           break
@@ -152,7 +149,6 @@ export class SwordTracker {
           } else if (r === "overlaps_ticking") {
             gl.fire(`title @a actionbar §c创建失败: 与常加载区域重叠`)
           } else {
-            log.success(`区域 ${r.name} 已创建 (${r.p1.join(",")} ~ ${r.p2.join(",")})`, { prefix: "Sword" })
             gl.fire(`title @a actionbar §a区域 ${r.name} 已创建!`)
           }
           this.selectState = "p1"

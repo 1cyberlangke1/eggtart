@@ -109,6 +109,28 @@ function extractTileNameCount(text: string): number {
   return n;
 }
 
+function slugify(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
+}
+
+function levenshtein(a: string, b: string): number {
+  const m = a.length, n = b.length;
+  const dp: number[][] = Array.from({ length: m + 1 }, (): number[] => Array.from({ length: n + 1 }, (): number => 0));
+  for (let i = 0; i <= m; i++) (dp[i] as number[])[0] = i;
+  const firstRow = dp[0] as number[];
+  for (let j = 0; j <= n; j++) firstRow[j] = j;
+  for (let i = 1; i <= m; i++) {
+    const row = dp[i] as number[];
+    const prevRow = dp[i - 1] as number[];
+    for (let j = 1; j <= n; j++) {
+      row[j] = a[i - 1] === b[j - 1]
+        ? (prevRow[j - 1] as number)
+        : Math.min(prevRow[j - 1] as number, prevRow[j] as number, row[j - 1] as number) + 1;
+    }
+  }
+  return (dp[m] as number[])[n] as number;
+}
+
 async function main() {
   const port = parsePort();
 
@@ -140,9 +162,36 @@ async function main() {
         const raw = await ev.world.queryData("block") as Array<{ name: string; id: string }>;
         console.log(`连 MC ✅ (queryData: ${raw.length} 方块)`);
 
-        const engNameToId = new Map<string, string>();
+        const nameEntries = new Map<string, string[]>();
         for (const b of raw) {
-          if (!engNameToId.has(b.name)) engNameToId.set(b.name, b.id);
+          const arr = nameEntries.get(b.name);
+          if (arr) {
+            if (!arr.includes(b.id)) arr.push(b.id);
+          } else {
+            nameEntries.set(b.name, [b.id]);
+          }
+        }
+        const engNameToId = new Map<string, string>();
+        for (const [name, ids] of nameEntries) {
+          const first = ids[0];
+          if (!first) continue;
+          if (ids.length === 1) {
+            engNameToId.set(name, first);
+          } else {
+            const slug = slugify(name);
+            let best = first;
+            let bestDist = levenshtein(slug, first);
+            for (let i = 1; i < ids.length; i++) {
+              const candidate = ids[i];
+              if (!candidate) continue;
+              const dist = levenshtein(slug, candidate);
+              if (dist < bestDist) {
+                bestDist = dist;
+                best = candidate;
+              }
+            }
+            engNameToId.set(name, best);
+          }
         }
 
         const enUsPath = langFiles.get("en_US.lang");
