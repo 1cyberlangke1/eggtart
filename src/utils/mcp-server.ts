@@ -62,6 +62,7 @@ export async function startMcpServer(port: number = 0): Promise<void> {
     if (r === null) return { content: [{ type: "text", text: "区域创建失败" }], isError: true }
     if (r === "too_large") return { content: [{ type: "text", text: `区域过大，上限 ${regionManager.regionMaxSize[0]}×${regionManager.regionMaxSize[1]}×${regionManager.regionMaxSize[2]}` }], isError: true }
     if (r === "max_regions") return { content: [{ type: "text", text: "最多 5 个区域" }], isError: true }
+    if (r === "overlaps_ticking") return { content: [{ type: "text", text: "区域与常加载区块重叠，请调整区域范围" }], isError: true }
     return { content: [{ type: "text", text: `区域 ${r.name} 已创建 (${r.p1.join(",")} ~ ${r.p2.join(",")})` }] }
   })
 

@@ -68,15 +68,15 @@ export class SwordTracker {
       }
       if (!this.holding) return
 
-      const tpOk = await gl.exec(`execute as @a[name=${gl.playerName}] at @s positioned ^ ^2 ^4 run tp @e[name=${MARKER},c=1] ~ ~ ~`)
+      const tpOk = await gl.exec(`execute as @a[name=${gl.playerName}] at @s positioned ^ ^2 ^4 run tp @e[name=${MARKER}] ~ ~ ~`)
         .then(r2 => r2.statusCode === 0).catch(() => false)
       if (!tpOk) {
         await gl.exec(`execute as @a[name=${gl.playerName}] at @s run summon armor_stand ~ ~ ~ 0 0 "" ${MARKER}`)
-        gl.fire(`effect @e[name=${MARKER},c=1] slow_falling 999999 1 true`)
-        await gl.exec(`execute as @a[name=${gl.playerName}] at @s positioned ^ ^2 ^4 run tp @e[name=${MARKER},c=1] ~ ~ ~`)
+        gl.fire(`effect @e[name=${MARKER}] slow_falling 999999 1 true`)
+        await gl.exec(`execute as @a[name=${gl.playerName}] at @s positioned ^ ^2 ^4 run tp @e[name=${MARKER}] ~ ~ ~`)
       }
 
-      const qr = await gl.exec(`querytarget @e[name=${MARKER},c=1]`)
+      const qr = await gl.exec(`querytarget @e[name=${MARKER}]`)
       const raw = qr.statusMessage
       const s = raw.indexOf("[")
       const e = raw.lastIndexOf("]")
@@ -111,40 +111,49 @@ export class SwordTracker {
       if (!this.lastTargetPos || !this.holding) return
 
       const gl = GameLoop.instance
+      if (!gl) return
       const [x, y, z] = this.lastTargetPos
+
+      if (regionManager.isInTickingArea(x, y, z)) {
+        gl.fire(`title @a actionbar §c常加载区块内禁用选点`)
+        this.selectState = "p1"
+        return
+      }
 
       switch (this.selectState) {
         case "p1":
           if (!regionManager.setP1(x, y, z)) {
-            gl?.fire(`title @a actionbar §c常加载区块内禁用选点`)
+            gl.fire(`title @a actionbar §c选区失败`)
             return
           }
           log.success(`点1 已设 (${x},${y},${z})`, { prefix: "Sword" })
-          gl?.fire(`title @a actionbar §a点1 已选: ${x} ${y} ${z}`)
+          gl.fire(`title @a actionbar §a点1 已选: ${x} ${y} ${z}`)
           this.selectState = "p2"
           break
 
         case "p2":
           if (!regionManager.setP2(x, y, z)) {
-            gl?.fire(`title @a actionbar §c常加载区块内禁用选点`)
+            gl.fire(`title @a actionbar §c选区失败`)
             return
           }
           log.success(`点2 已设 (${x},${y},${z})`, { prefix: "Sword" })
-          gl?.fire(`title @a actionbar §a点2 已选: ${x} ${y} ${z}`)
+          gl.fire(`title @a actionbar §a点2 已选: ${x} ${y} ${z}`)
           this.selectState = "create"
           break
 
         case "create": {
           const r = regionManager.createRegion()
           if (r === null) {
-            gl?.fire(`title @a actionbar §c创建失败: 先选两点`)
+            gl.fire(`title @a actionbar §c创建失败: 先选两点`)
           } else if (r === "too_large") {
-            gl?.fire(`title @a actionbar §c创建失败: 区域过大`)
+            gl.fire(`title @a actionbar §c创建失败: 区域过大`)
           } else if (r === "max_regions") {
-            gl?.fire(`title @a actionbar §c创建失败: 区域已达上限`)
+            gl.fire(`title @a actionbar §c创建失败: 区域已达上限`)
+          } else if (r === "overlaps_ticking") {
+            gl.fire(`title @a actionbar §c创建失败: 与常加载区域重叠`)
           } else {
             log.success(`区域 ${r.name} 已创建 (${r.p1.join(",")} ~ ${r.p2.join(",")})`, { prefix: "Sword" })
-            gl?.fire(`title @a actionbar §a区域 ${r.name} 已创建!`)
+            gl.fire(`title @a actionbar §a区域 ${r.name} 已创建!`)
           }
           this.selectState = "p1"
           break

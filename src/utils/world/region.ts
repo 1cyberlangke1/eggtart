@@ -136,7 +136,16 @@ class RegionManager {
     return true
   }
 
-  createRegion(name?: string): Region | null | "too_large" | "max_regions" {
+  overlapsTickingArea(mx: number, my: number, mz: number, Mx: number, My: number, Mz: number): boolean {
+    const ta = this.tickingAreaFrom
+    const tb = this.tickingAreaTo
+    if (!ta || !tb) return false
+    return mx <= tb[0] && Mx >= ta[0]
+      && my <= tb[1] && My >= ta[1]
+      && mz <= tb[2] && Mz >= ta[2]
+  }
+
+  createRegion(name?: string): Region | null | "too_large" | "max_regions" | "overlaps_ticking" {
     if (!this.currentP1 || !this.currentP2) return null
     if (this.regions.size >= MAX_REGIONS) return "max_regions"
 
@@ -147,6 +156,7 @@ class RegionManager {
     const dy = My - my + 1
     const dz = Mz - mz + 1
     if (dx > this.regionMaxSize[0] || dy > this.regionMaxSize[1] || dz > this.regionMaxSize[2]) return "too_large"
+    if (this.overlapsTickingArea(mx, my, mz, Mx, My, Mz)) return "overlaps_ticking"
 
     const n = name ?? `region_${++this.autoId}`
     const region: Region = {

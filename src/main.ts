@@ -95,6 +95,7 @@ registerChatCommands(server, [
     if (r === null) return Promise.resolve(null)
     if (r === "too_large") return Promise.resolve(`区域过大，上限 ${config.regionMaxSize[0]}×${config.regionMaxSize[1]}×${config.regionMaxSize[2]}`)
     if (r === "max_regions") return Promise.resolve(`最多 5 个区域`)
+    if (r === "overlaps_ticking") return Promise.resolve("区域与常加载区块重叠，请调整区域范围")
     return Promise.resolve(`区域 ${r.name} 已创建 (${r.p1.join(",")} ~ ${r.p2.join(",")})`)
   }, "创建区域（缺省名自动生成）"),
   cmd("regions", [], () => {
